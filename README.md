@@ -7,7 +7,7 @@ CAN bus libraries and send/receive templates.
 ## Overview
 CAN Bus is a reliable communication protocol widely used in vehicles. All microcontrollers can send messages on the bus but those with higher priorities (lower numerical ID) take precedence. Every microcontroller can read every message on the bus as well as the associated ID. Message failure is automatically handled, and nodes will try again until message is successful, or will auto shut-off if it fails too many times. RX filters (masks) can be used to accept only messages fitting certain requirements.
 
-### Transmission Details  
+### Technical Details  
 CAN Bus sends messages in a frame, which contains ID, delimiters, data, and checking bits. Each frame is 128 bits and frames are separated by 3 interframe spacing bits. Within the frame is a maximum of 8 bytes for data. Max baud rate is 1Mbps but decreases for long bus length. If 5 of the same bits appear in a row, the transmitter will "stuff" an extra bit of opposite polarity to help keep track of clock edges. If possible, avoid long strings of 1s or 0s as this can increase message size by 10%.
 
 CAN IDs are an 11bit usually hexidecimal number. On the CAN bus, a state of 1 is passive and a state of 0 is passive. During the arbitration phase of a frame, all nodes attempt to send their ID at the same time. If a bit in a node's ID is 1 (passive) but the node sees a 0 (active), it means another node with higher priority is also attempting to transmit, so the lower priority node waits for the next frame. 0x00 is the highest priority ID.
